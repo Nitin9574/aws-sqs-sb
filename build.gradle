@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.6'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.jtf'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter:3.0.3'
+    implementation 'io.awspring.cloud:spring-cloud-aws-sqs:3.0.3'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws
+    // https://mvnrepository.com/artifact/io.awspring.cloud/spring-cloud-aws-starter
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/sqs
+    // https://mvnrepository.com/artifact/io.awspring.cloud/spring-cloud-aws-sqs
+    //implementation 'io.awspring.cloud:spring-cloud-aws-sqs:3.0.3'
+    //implementation platform("io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAwsVersion}")
+    // Replace the following with the starter dependencies of specific modules you wish to use
+    //implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs'
+    // https://mvnrepository.com/artifact/io.awspring.cloud/spring-cloud-aws-sqs
+    // implementation 'software.amazon.awssdk:sqs:2.21.37'
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws-messaging
+    //implementation 'org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE'
+
+}
+
+tasks.named('bootBuildImage') {
+    builder = 'paketobuildpacks/builder-jammy-base:latest'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
